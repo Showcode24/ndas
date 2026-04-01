@@ -28,7 +28,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#F8FAFC] selection:bg-blue-900 selection:text-white">
       <Navigation />
 
-      {/* Hero Section (Assumed Unchanged, just wrapped for context) */}
+      {/* Hero Section */}
       <section className="pt-16 md:pt-20 px-4 md:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <HeroSlider
@@ -37,6 +37,7 @@ export default function Home() {
               title: heroSlides[i].title,
               subtitle: heroSlides[i].subtitle,
               image: heroSlides[i].image,
+              href: `/academics/${p.id}`, // Added href for slider clicks
             }))}
           />
         </div>
@@ -54,15 +55,22 @@ export default function Home() {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-                Excellence in Maritime Education Since 1949
+                Building Skilled Maritime Professionals for Over 30 Years
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Naval Dockyard Apprenticeship School (NDAS) is a premier
-                institution dedicated to training the next generation of
-                maritime professionals. With state-of-the-art facilities and
-                expert faculty, we prepare engineers and technicians for careers
-                in naval architecture, marine engineering, and maritime
-                operations.
+                The Naval Dockyard Apprenticeship School (NDAS) is a leading
+                institution committed to delivering high-quality technical and
+                artisanal training in maritime-related engineering fields. For
+                over three decades, the school has consistently equipped
+                apprentices with practical skills and industry-relevant
+                knowledge, graduating over 70 trainees annually. Beyond
+                technical training, NDAS plays a vital role in addressing
+                unemployment by empowering graduates to become self-reliant,
+                establish their own workshops, and create job opportunities for
+                others. Guided by a strong commitment to excellence, student
+                welfare, and the value of people, the school continues to
+                support the growth of Nigeria’s maritime, technological, and
+                economic sectors.
               </p>
               <div className="flex gap-4">
                 <Link href="/about">
@@ -84,27 +92,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =======================================================
-          REVAMPED UI/UX STARTS HERE
-          ======================================================= */}
-
-      {/* Statistics Section - Modern Glass & Blur */}
+      {/* Statistics Section */}
       <section className="relative py-32 overflow-hidden bg-[#0F172A]">
-        {/* Dynamic Abstract Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
             style={{ y }}
             className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-blue-600/20 blur-[150px] rounded-full mix-blend-screen"
           />
           <div className="absolute bottom-[0%] -left-[10%] w-[50%] h-[50%] bg-cyan-500/10 blur-[120px] rounded-full mix-blend-screen" />
-
-          {/* Subtle Grid overlay */}
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            {/* Left Content Area */}
             <div className="lg:col-span-5 text-left">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -144,7 +144,6 @@ export default function Home() {
               </motion.p>
             </div>
 
-            {/* Right Stats Area - Asymmetric Glass Cards */}
             <div className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -160,10 +159,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Programs Section - Editorial Layout */}
+      {/* Programs Section */}
       <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white relative">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-4">
@@ -188,7 +186,6 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Grid Layout - Modern Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {mockPrograms.slice(0, 4).map((program: any, index: number) => (
               <motion.div
@@ -199,19 +196,20 @@ export default function Home() {
                 viewport={{ once: true, margin: "-50px" }}
                 className="group relative"
               >
-                {/* Assuming ProgramCard is styled internally, but wrapping it to ensure it fits the new aesthetic */}
-                <ProgramCard program={program} index={index} />
+                {/* Wrapped ProgramCard in Link to detail page */}
+                <Link href={`/academics/${program.id}`}>
+                  <ProgramCard program={program} index={index} />
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events - Magazine Style */}
+      {/* Upcoming Events */}
       <section className="py-32 px-4 sm:px-6 lg:px-8 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Header Column */}
             <div className="lg:col-span-1 flex flex-col justify-between">
               <div>
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 text-blue-600 mb-6">
@@ -233,7 +231,6 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Event Cards Column */}
             <div className="lg:col-span-2">
               <div className="flex flex-col gap-6">
                 {upcomingEvents.map((event: any, index: number) => (
@@ -244,7 +241,6 @@ export default function Home() {
                     transition={{ delay: index * 0.15 }}
                     viewport={{ once: true }}
                   >
-                    {/* EventCard should ideally be styled as a horizontal row here rather than a vertical block for premium feel */}
                     <EventCard event={event} index={index} />
                   </motion.div>
                 ))}
@@ -254,16 +250,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <div className="bg-white">
         <TestimonialSection />
       </div>
 
-      {/* CTA Section - The "Hero Footer" */}
+      {/* CTA Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="relative overflow-hidden rounded-[3rem] bg-[#0F172A] px-8 py-20 text-center shadow-2xl">
-            {/* Decorative Inner Elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
               <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/30 blur-[100px] rounded-full" />
               <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-600/20 blur-[100px] rounded-full" />
