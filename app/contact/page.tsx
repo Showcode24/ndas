@@ -116,12 +116,14 @@ export default function ContactPage() {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">
-                    Our Anchorage
+                    Find Us
                   </h3>
                   <p className="text-slate-600 leading-relaxed">
-                    Naval Dockyard, Tiger Gate,
+                    Naval Dockyard Limited, 28,
                     <br />
-                    Mumbai, Maharashtra 400001
+                    Ahmadu Bello Way, Victoria Island,
+                    <br />
+                    Lagos, Nigeria
                   </p>
                 </motion.div>
 
@@ -139,7 +141,9 @@ export default function ContactPage() {
                   <h3 className="text-xl font-bold text-slate-900 mb-2">
                     Direct Lines
                   </h3>
-                  <p className="text-slate-600">+91 (22) 2275-XXXX</p>
+                  <p className="text-slate-600">+234 (91) 5225 7946</p>
+                  <p className="text-slate-600">+234 (91) 5225 7945</p>
+                  <p className="text-slate-600">+234 (91) 5225 7944</p>
                   <p className="text-slate-600">helpdesk@ndas.edu.in</p>
                 </motion.div>
               </div>
@@ -154,7 +158,7 @@ export default function ContactPage() {
               >
                 <Clock className="absolute -right-8 -bottom-8 w-48 h-48 text-white/10 group-hover:rotate-12 transition-transform duration-700" />
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-4">Watch Hours</h3>
+                  <h3 className="text-2xl font-bold mb-4">Work Hours</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between border-b border-white/20 pb-2">
                       <span>Mon — Friday</span>
@@ -182,7 +186,7 @@ export default function ContactPage() {
             >
               <div className="mb-10">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-                  Send a Signal
+                  Make an Enquiry
                 </h2>
                 <p className="text-slate-500">
                   Complete the form below and our command center will route your

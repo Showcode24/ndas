@@ -71,7 +71,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-sm opacity-75">
-              Preparing leaders in maritime engineering and naval sciences since 1949.
+              Preparing leaders in maritime engineering and naval sciences since 1985.
             </p>
           </motion.div>
 
@@ -110,7 +110,7 @@ export function Footer() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <p>&copy; 2024 Naval Dockyard Apprenticeship School. All rights reserved.</p>
+          <p>&copy; 2026 Naval Dockyard Apprenticeship School. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="#" className="hover:opacity-100 transition-opacity">
               Privacy Policy

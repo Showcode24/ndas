@@ -22,13 +22,13 @@ const missionValues = [
     icon: Target,
     title: "Our Mission",
     description:
-      "To develop skilled, professional maritime engineers and technicians who meet international standards and contribute to naval excellence.",
+      "To train highly skilled artisans to meet the manpower needs of dockyardships in shipbuilding and repairs.",
   },
   {
     icon: Award,
-    title: "Excellence",
+    title: "Our Vision",
     description:
-      "We maintain the highest standards of education and training through state-of-the-art facilities and expert faculty.",
+      "To be a centre of excellence for artisanal training in maritime related engineering fields.",
   },
   {
     icon: Users,
@@ -99,7 +99,7 @@ export default function AboutPage() {
             >
               <span className="h-px w-12 bg-blue-500" />
               <span className="text-sm font-bold uppercase tracking-widest text-blue-400">
-                Est. 1949
+                Est. 1985
               </span>
             </motion.div>
 
@@ -119,8 +119,7 @@ export default function AboutPage() {
               variants={fadeUp}
               className="text-xl md:text-2xl text-slate-300 max-w-2xl leading-relaxed font-light"
             >
-              Discover the history, mission, and the people behind India's
-              premier Naval Dockyard Apprenticeship School.
+              Discover the history, mission, and the people behind Naval Dockyard Apprenticeship School.
             </motion.p>
           </motion.div>
         </div>
@@ -167,7 +166,7 @@ export default function AboutPage() {
                   variants={fadeUp}
                   className="text-2xl md:text-3xl font-medium text-slate-900 leading-snug mb-10"
                 >
-                  Founded in 1949, NDAS has been at the absolute forefront of
+                  Founded in 1985, NDAS has been at the absolute forefront of
                   maritime education, charting the course for future naval
                   engineers and technicians.
                 </motion.p>
