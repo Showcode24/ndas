@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Anchor, Mail, MapPin, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 const footerSections = [
   {
@@ -64,7 +65,14 @@ export function Footer() {
           {/* Brand */}
           <motion.div variants={itemVariants}>
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Anchor className="w-6 h-6" />
+             <motion.div
+                           className="w-12 h-12 rounded-lg bg-white flex items-center justify-center"
+                           whileHover={{ rotate: 360 }}
+                           transition={{ duration: 0.6 }}
+                         >
+                           <Image src="/ndas-logo.png" width={50} height={50} alt='ndas-logo'/>
+                           {/* <Anchor className="w-5 h-5 text-primary-foreground" /> */}
+                         </motion.div>
               <div>
                 <div className="text-lg font-bold">NDAS</div>
                 <div className="text-xs opacity-75">Maritime Excellence</div>

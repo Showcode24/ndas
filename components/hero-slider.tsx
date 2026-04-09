@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface HeroSlide {
   id: string;
@@ -99,7 +100,7 @@ export function HeroSlider({
               transition={{ duration: 0.5, delay: 0.8 }}
             >
               <button className="px-8 py-4 bg-[#C5A059] hover:bg-[#b08d4a] text-white transition-all duration-300 font-semibold tracking-wider uppercase text-sm shadow-xl">
-                Explore Programs
+                <Link href="/academics">Explore Programs</Link>
               </button>
             </motion.div>
           </div>

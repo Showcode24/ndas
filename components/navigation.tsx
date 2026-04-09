@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Anchor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -27,11 +28,12 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <motion.div
-              className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"
+              className="w-8 h-8 rounded-lg bg-white flex items-center justify-center"
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
-              <Anchor className="w-5 h-5 text-primary-foreground" />
+              <Image src="/ndas-logo.png" width={100} height={100} alt='ndas-logo'/>
+              {/* <Anchor className="w-5 h-5 text-primary-foreground" /> */}
             </motion.div>
             <div className="hidden md:block">
               <div className="text-sm font-bold text-foreground">NDAS</div>
