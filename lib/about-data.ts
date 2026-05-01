@@ -22,8 +22,7 @@ export const leadershipData = {
   co: {
     name: "Captain SI Shuaibu",
     title: "Commanding Officer, NDL Apprentice School",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&h=500&auto=format&fit=crop",
+    image: "/co-ndas.jpeg",
   },
 } as const;
 

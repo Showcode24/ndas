@@ -20,7 +20,7 @@ export const facilitiesPageData = {
       category: "Workshop",
       description:
         "A practical training space for metal joining, fabrication work, cutting operations, and related workshop tasks.",
-      image: "/images/facilities/welding.jpg",
+      image: "/welding.jpg",
     },
     {
       id: "electrical",
@@ -28,7 +28,7 @@ export const facilitiesPageData = {
       category: "Laboratory",
       description:
         "A dedicated environment for electrical installation practice, motor rewinding, fault tracing, and related exercises.",
-      image: "/images/facilities/electrical.jpg",
+      image: "/electrical.jpg",
     },
     {
       id: "plumbing",
@@ -36,7 +36,7 @@ export const facilitiesPageData = {
       category: "Workshop",
       description:
         "A purpose-built area for practical plumbing and pipe fitting exercises, including installation and maintenance tasks.",
-      image: "/images/facilities/plumbing.jpg",
+      image: "/plumbing.jpg",
     },
     {
       id: "carpentry",
@@ -44,7 +44,7 @@ export const facilitiesPageData = {
       category: "Workshop",
       description:
         "A workshop space for woodwork, joinery practice, fitting tasks, and related practical training activities.",
-      image: "/images/facilities/carpentry.jpg",
+      image: "/carpentry.jpg",
     },
   ],
 

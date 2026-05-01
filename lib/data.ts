@@ -235,19 +235,19 @@ export const heroSlides = [
     id: "1",
     title: "Excellence in Maritime Education",
     subtitle: "Training Leaders of Tomorrow",
-    image: "/placeholder-hero-1.jpg",
+    image: "/hero.jpg",
   },
   {
     id: "2",
     title: "State-of-the-Art Facilities",
     subtitle: "World-Class Training Infrastructure",
-    image: "/placeholder-hero-2.jpg",
+    image: "/hero.jpg",
   },
   {
     id: "3",
     title: "Industry-Ready Professionals",
     subtitle: "Bridging Education and Innovation",
-    image: "/placeholder-hero-3.jpg",
+    image: "/hero.jpg",
   },
 ];
 

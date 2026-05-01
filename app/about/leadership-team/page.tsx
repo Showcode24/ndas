@@ -339,7 +339,7 @@ export default function LeadershipPage() {
       </section>
 
       {/* 6. Past Commanding Officers */}
-      <section className="py-32 px-6 bg-slate-50 border-t border-slate-200">
+      {/* <section className="py-32 px-6 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
@@ -390,7 +390,7 @@ export default function LeadershipPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 7. CTA */}
       <section className="py-24 px-6">
