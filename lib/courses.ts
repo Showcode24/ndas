@@ -7,7 +7,7 @@ export const mockPrograms = [
     shortDesc:
       "Master shipboard power systems, PLC automation, and industrial motor restoration.",
     fullDesc:
-      "Apprentices are poised to learn the design of electrical power systems onboard ships, with a primary focus on operation, maintenance, and secure power supply. The course introduces cutting-edge technology including Festo Automation Programmable Logic Controllers (PLC) for motor control and Multisim™ software for advanced circuit simulation and PCB design. A core component includes motor winding, conducted in collaboration with Naval Dockyard Limited (NDL) experts using industrial-grade facilities.",
+      "Apprentices are poised to learn the design of electrical power systems onboard ships...",
     duration: "24 Months",
     certification: "National Technical Certificate",
     location: "NDAS Campus & NDL Workshops",
@@ -62,7 +62,7 @@ export const mockPrograms = [
     shortDesc:
       "Advanced power electronics and precision control for industrial electric motors.",
     fullDesc:
-      "The Motor Drives course complements Basic Controls, providing the expertise required to manage motor systems through electronic drives. Students delve into the world of semiconductors, converters, and sophisticated control techniques like Pulse-Width Modulation (PWM) and Field-Oriented Control (FOC). This program is essential for high-tech roles in robotics, manufacturing, and renewable energy sectors.",
+      "The Motor Drives course complements Basic Controls, providing the expertise required to manage motor systems through electronic drives...",
     duration: "12 Months",
     certification: "Specialized Technical Certificate",
     location: "Automation Lab",
@@ -112,7 +112,7 @@ export const mockPrograms = [
     shortDesc:
       "Traditional craftsmanship meets naval engineering for shipbuilding and structural woodwork.",
     fullDesc:
-      "Designed for those who appreciate precision and pride in craftsmanship, this course introduces apprentices to carpentry within the shipbuilding industry. It covers the mastery of hand tools, power tools, and industrial machinery. Apprentices gain deep knowledge of timber processing and participate in practical visits to Naval Dockyard Limited and active ships to understand maritime woodwork applications.",
+      "Designed for those who appreciate precision and pride in craftsmanship...",
     duration: "24 Months",
     certification: "National Technical Certificate",
     location: "NDAS Woodwork Workshop & NDL",
@@ -157,7 +157,7 @@ export const mockPrograms = [
     shortDesc:
       "Precision fluid system engineering for naval vessels and industrial infrastructure.",
     fullDesc:
-      "Modern shipbuilding mandates personnel who can repair complex piping systems under tight schedules. This course acquaints apprentices with safety precautions and the technical knowledge required for various plumbing equipment and processes. It emphasizes material selection suitable for high-pressure systems onboard ships and includes industrial visits to Dorman Long Engineering workshops.",
+      "Modern shipbuilding mandates personnel who can repair complex piping systems under tight schedules...",
     duration: "18 Months",
     certification: "National Technical Certificate",
     location: "Mechanical Workshop & Dorman Long Engineering",
@@ -199,7 +199,7 @@ export const mockPrograms = [
     shortDesc:
       "Structural metal mastery, from blast furnace theory to advanced arc welding.",
     fullDesc:
-      "This course provides the essential skills to fabricate and repair complex metal objects. Apprentices learn the physical properties of various metals and the manufacturing processes behind steel and iron. The practical phase focuses on electric arc and gas welding, ensuring graduates can perform high-integrity repairs in maritime and industrial environments.",
+      "This course provides the essential skills to fabricate and repair complex metal objects...",
     duration: "24 Months",
     certification: "National Technical Certificate",
     location: "Fabrication Lab & NDL Shipyard",

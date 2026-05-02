@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { DM_Sans } from "next/font/google";
+import Image from "next/image";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const NAV = [
   // { label: "Projects & Gallery", href: "/facilities", dropdown: false },
   // { label: "News & Events", href: "/news", dropdown: false },
   // { label: "Portal", href: "/portal", dropdown: false },
+  { label: "Facilities", href: "/facilities", dropdown: false },
   { label: "Partnerships", href: "/partnerships", dropdown: false },
   { label: "Contact", href: "/contact", dropdown: false },
 ];
@@ -243,16 +245,8 @@ function Header() {
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10 flex items-center justify-between py-3 gap-6">
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div
-            className="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
-            style={{
-              background:
-                "radial-gradient(circle at 38% 38%, #fff8dd 0%, #ecd18f 55%, #c8a03c 100%)",
-            }}
-          >
-            <span className="text-[#0b2748] font-black text-[13px] tracking-tight">
-              ND
-            </span>
+          <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+            <Image src="/ndas-logo.png" width={100} height={100} alt="logo" />
           </div>
           <div className="leading-none">
             <p className="text-[#0b2748] font-black text-[15px] leading-[1.1] tracking-tight uppercase">
