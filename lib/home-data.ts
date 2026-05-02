@@ -8,11 +8,12 @@ export const institution = {
   abbreviation: "NDAS",
   parentOrganization: "Naval Dockyard Limited",
   recommissioned: "31 May 2019",
-  tagline: "Practical skills · Technical discipline",
+  tagline: "Technology is Development",
   description:
     "The technical training school of Naval Dockyard Limited, focused on apprenticeship, practical engineering trades, and dockyard-relevant technical manpower development.",
   location: {
-    address: "Tiger Gate, Victoria Island",
+    address:
+      "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
     area: "Naval Dockyard Limited Compound",
     city: "Victoria Island",
     state: "Lagos",
@@ -110,7 +111,10 @@ export const homeData = {
     items: [
       { value: snapshot.recommissioned, label: "Re-Commissioned" },
       { value: String(snapshot.coreTrades), label: "Core Trades" },
-      { value: snapshot.trainingPathway.join(" · "), label: "Training Pathway" },
+      {
+        value: snapshot.trainingPathway.join(" · "),
+        label: "Training Pathway",
+      },
       { value: snapshot.learningModel, label: "Applied Learning Model" },
     ],
   },

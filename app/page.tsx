@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { DM_Sans } from "next/font/google";
 import Image from "next/image";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -22,13 +28,8 @@ const NAV = [
   { label: "About NDAS", href: "/about", dropdown: true },
   { label: "Academics", href: "/academics", dropdown: true },
   { label: "Admissions", href: "/admissions", dropdown: false },
-  // { label: "Student Life", href: "/student-life", dropdown: true },
-  // { label: "Projects & Gallery", href: "/facilities", dropdown: false },
-  // { label: "News & Events", href: "/news", dropdown: false },
-  // { label: "Portal", href: "/portal", dropdown: false },
   { label: "Facilities", href: "/facilities", dropdown: false },
   { label: "Partnerships", href: "/partnerships", dropdown: false },
-  { label: "Contact", href: "/contact", dropdown: false },
 ];
 
 const STATS = [
@@ -49,7 +50,7 @@ const ABOUT_ROWS = [
   },
   {
     label: "LOCATION",
-    text: "Tiger Gate, Naval Dockyard Limited Compound, Victoria Island, Lagos — operating within a working dockyard unique among Nigerian technical training institutions.",
+    text: "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria — operating within a working dockyard unique among Nigerian technical training institutions.",
   },
 ];
 
@@ -126,8 +127,13 @@ const FOOTER_COLS = [
   {
     heading: "Contact",
     links: [
-      { label: "Tiger Gate, Victoria Island", href: "#" },
-      { label: "Official contacts TBC", href: "#" },
+      {
+        label:
+          "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
+        href: "#",
+      },
+      { label: "Email: info@ndlapprenticeschool.com", href: "#" },
+      { label: "Phone: +234 904 799 8706", href: "/contact" },
       { label: "Send an enquiry", href: "/contact" },
     ],
   },
@@ -186,7 +192,7 @@ function Topbar() {
           </a>
           {/* Email */}
           <a
-            href="mailto:info@ndlapprenticesschool.com"
+            href="mailto:info@ndlapprenticeschool.com"
             className="flex items-center gap-1.5 hover:text-white transition-colors"
           >
             <svg
@@ -197,7 +203,7 @@ function Topbar() {
               <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
             </svg>
-            info@ndlapprenticesschool.com
+            info@ndlapprenticeschool.com
           </a>
           {/* Social icons */}
           <div className="flex items-center gap-1.5 border-l border-[#e8eef5]/30 pl-4">
@@ -240,14 +246,35 @@ function Topbar() {
 /* ─────────────────────────── header ────────────────────────────── */
 
 function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#0b2748]/10 shadow-[0_1px_12px_rgba(11,39,72,0.07)]">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: expo, delay: 0.2 }}
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-white/98 backdrop-blur-xl shadow-[0_4px_30px_rgba(11,39,72,0.12)]"
+          : "bg-white/95 backdrop-blur-md shadow-[0_1px_12px_rgba(11,39,72,0.07)]"
+      }`}
+    >
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10 flex items-center justify-between py-3 gap-6">
-        {/* ── Logo ── */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+        <Link href="/" className="flex items-center gap-3 shrink-0 group">
+          <motion.div
+            whileHover={{ rotate: 10, scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+            className="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
+          >
             <Image src="/ndas-logo.png" width={100} height={100} alt="logo" />
-          </div>
+          </motion.div>
           <div className="leading-none">
             <p className="text-[#0b2748] font-black text-[15px] leading-[1.1] tracking-tight uppercase">
               Naval Dockyard
@@ -255,57 +282,163 @@ function Header() {
             <p className="text-[#0b2748] font-black text-[15px] leading-[1.1] tracking-tight uppercase">
               Apprentice School
             </p>
+            <p className="text-[#0b2748]/50 text-[10px] font-medium tracking-wide mt-0.5">
+              Technology is Development
+            </p>
           </div>
         </Link>
 
-        {/* ── Nav ── */}
         <nav className="hidden xl:flex items-center gap-1 flex-1 justify-center">
-          {NAV.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors rounded-sm
-                ${
-                  item.active
-                    ? "text-[#0b2748]"
-                    : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
-                }`}
-            >
-              {item.label}
-              {item.dropdown && (
-                <svg
-                  className="w-3 h-3 opacity-50"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  viewBox="0 0 24 24"
+          {NAV.map((item, i) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.05 * i, ease: expo }}
+              >
+                <Link
+                  href={item.href}
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-all duration-300 rounded-sm relative group ${
+                    isActive
+                      ? "text-[#0b2748]"
+                      : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              )}
-            </Link>
-          ))}
+                  {item.label}
+                  {item.dropdown && (
+                    <svg
+                      className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full"
+                    />
+                  )}
+                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </motion.div>
+            );
+          })}
         </nav>
 
-        {/* ── Search icon ── */}
-        <button className="shrink-0 w-9 h-9 flex items-center justify-center text-[#0b2748]/60 hover:text-[#0b2748] hover:bg-[#f0f3f7] rounded-sm transition-colors">
-          <svg
-            className="w-4.5 h-4.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path strokeLinecap="round" d="M21 21l-4.35-4.35" />
-          </svg>
-        </button>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <MagneticButton href="/contact" variant="primary">
+            Contact NDAS
+          </MagneticButton>
+        </motion.div>
       </div>
-    </header>
+    </motion.header>
+  );
+}
+
+/* ─────────────────────────── magnetic button ───────────────────── */
+
+function MagneticButton({
+  children,
+  href,
+  variant = "primary",
+  className = "",
+  onClick,
+}: {
+  children: React.ReactNode;
+  href?: string;
+  variant?: "primary" | "outline" | "secondary";
+  className?: string;
+  onClick?: () => void;
+}) {
+  const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) * 0.4);
+    y.set((e.clientY - centerY) * 0.4);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const base =
+    "inline-flex items-center text-[12px] font-bold tracking-[0.15em] uppercase px-8 py-4 transition-colors duration-300 whitespace-nowrap text-center relative overflow-hidden";
+  const styles =
+    variant === "primary"
+      ? "bg-[#af8f47] text-[#0d2238] hover:bg-[#c8a44c]"
+      : variant === "secondary"
+        ? "bg-[#0b2748] text-white hover:bg-[#0b2748]/90"
+        : "text-white border border-white/30 hover:bg-white/10 hover:border-white/50";
+
+  if (href) {
+    return (
+      <Link
+        ref={ref as any}
+        href={href}
+        className={`${base} ${styles} ${className}`}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ x: springX, y: springY }}
+      >
+        <span className="relative z-10">{children}</span>
+        {variant === "primary" && (
+          <motion.div
+            className="absolute inset-0 bg-white/20 skew-x-12"
+            initial={{ x: "-150%" }}
+            whileHover={{ x: "150%" }}
+            transition={{ duration: 0.7, ease: expo }}
+          />
+        )}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      ref={ref as any}
+      className={`${base} ${styles} ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+      onClick={onClick}
+    >
+      <span className="relative z-10">{children}</span>
+      {variant === "primary" && (
+        <motion.div
+          className="absolute inset-0 bg-white/20 skew-x-12"
+          initial={{ x: "-150%" }}
+          whileHover={{ x: "150%" }}
+          transition={{ duration: 0.7, ease: expo }}
+        />
+      )}
+    </button>
   );
 }
 
@@ -313,38 +446,60 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[480px] md:min-h-[520px] flex items-center overflow-hidden bg-[#0b2748]">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('/images/hero-worker.jpg'), linear-gradient(135deg, #0b2748 0%, #1d4e81 100%)`,
-          backgroundBlendMode: "overlay",
-        }}
-      />
+    <section className="relative min-h-[520px] md:min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden bg-[#0b2748]">
+      {/* Mobile background image */}
+      <div className="absolute inset-0 lg:hidden">
+        <Image
+          src="/hero-image.png"
+          alt="NDAS apprentice operating industrial machinery"
+          fill
+          className="object-cover object-center opacity-15"
+          priority
+          sizes="100vw"
+        />
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0b2748] via-[#0b2748]/80 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0b2748]/50 via-transparent to-transparent" />
+      {/* Desktop right-side image — full height, far right */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: expo, delay: 0.15 }}
+        className="hidden lg:block absolute top-0 right-0 h-full w-[48%] xl:w-[50%]"
+      >
+        <Image
+          src="/hero-image.png"
+          alt="NDAS apprentice operating industrial machinery"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="50vw"
+        />
+        {/* Soft gradient blend where image meets the navy background */}
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0b2748] to-transparent" />
+      </motion.div>
 
       <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 sm:px-10 py-20 md:py-28">
         <motion.div
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: expo }}
-          className="max-w-[600px]"
+          className="max-w-[580px]"
         >
           <h1 className="text-[clamp(2rem,5vw,3.4rem)] font-bold leading-[1.12] tracking-tight text-white mb-5">
-            Shaping Technical Excellence.
+            Training the Hands
             <br />
-            Building{" "}
+            that Build and{" "}
             <span className="text-[#af8f47] underline decoration-[#af8f47]/40 underline-offset-4">
-              Nigeria&rsquo;s
+              Maintain Ships&rsquo;s
             </span>{" "}
             Future.
           </h1>
 
           <p className="text-white/70 text-[15px] sm:text-[17px] font-light leading-[1.7] mb-10 max-w-[46ch]">
-            Practical. Professional. Purposeful. NDAS trains skilled hands and
-            competent minds for the industries of today and tomorrow.
+            NDAS develops artisans and technicians in four core engineering
+            trades inside the Naval Dockyard environment at Victoria Island,
+            Lagos. The School&apos;s character is defined by practical learning,
+            technical discipline, and proximity to real engineering work.
           </p>
 
           <div className="flex flex-wrap gap-4">

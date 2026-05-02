@@ -143,8 +143,13 @@ const FOOTER_COLS = [
   {
     heading: "Contact",
     links: [
-      { label: "Tiger Gate, Victoria Island", href: "#" },
-      { label: "Official contacts TBC", href: "#" },
+      {
+        label:
+          "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
+        href: "#",
+      },
+      { label: "info@ndlapprenticeschool.com | +234 904 799 8706
+", href: "#" },
       { label: "Send an enquiry", href: "/contact" },
     ],
   },
@@ -523,7 +528,7 @@ function Header() {
               Apprentice School
             </p>
             <p className="text-[#0b2748]/50 text-[10px] font-medium tracking-wide mt-0.5">
-              Practical skills · Technical discipline
+              Technology is Development
             </p>
           </div>
         </Link>
@@ -1208,7 +1213,8 @@ function LocationSection() {
                     Map Integration
                   </p>
                   <p className="text-white/40 text-[12px] font-medium mt-1">
-                    Tiger Gate, Victoria Island, Lagos
+                    Naval Dockyard Apprentice School 28, Ahmadu Bello Way,
+                    Victoria Island, Lagos, Nigeria, Lagos
                   </p>
                 </div>
               </div>

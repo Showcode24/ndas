@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { DM_Sans } from "next/font/google";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ const NAV = [
   // { label: "Portal", href: "/portal", dropdown: false },
   { label: "Facilities", href: "/facilities", dropdown: false },
   { label: "Partnerships", href: "/partnerships", dropdown: false },
-  { label: "Contact", href: "/contact", dropdown: false },
+  // { label: "Contact", href: "/contact", dropdown: false },
 ];
 
 const STEPS = [
@@ -113,8 +114,13 @@ const FOOTER_COLS = [
   {
     heading: "Contact",
     links: [
-      { label: "Tiger Gate, Victoria Island", href: "#" },
-      { label: "Official contacts TBC", href: "#" },
+      {
+        label:
+          "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
+        href: "#",
+      },
+ { label: "Email: info@ndlapprenticeschool.com", href: "#" },
+      { label: "Phone: +234 904 799 8706", href: "/contact" },
       { label: "Send an enquiry", href: "/contact" },
     ],
   },
@@ -420,9 +426,9 @@ function Topbar() {
               text: "+234 904 799 8706",
             },
             {
-              href: "mailto:info@ndlapprenticesschool.com",
+              href: "mailto:info@ndlapprenticeschool.com",
               icon: "M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z",
-              text: "info@ndlapprenticesschool.com",
+              text: "info@ndlapprenticeschool.com",
             },
           ].map((item, i) => (
             <motion.a
@@ -494,6 +500,7 @@ function Topbar() {
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -528,75 +535,76 @@ function Header() {
             <p className="text-[#0b2748] font-black text-[15px] leading-[1.1] tracking-tight uppercase">
               Apprentice School
             </p>
+            <p className="text-[#0b2748]/50 text-[10px] font-medium tracking-wide mt-0.5">
+              Technology is Development
+            </p>
           </div>
         </Link>
 
         <nav className="hidden xl:flex items-center gap-1 flex-1 justify-center">
-          {NAV.map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 * i, ease: expo }}
-            >
-              <Link
-                href={item.href}
-                className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-all duration-300 rounded-sm relative group ${
-                  item.active
-                    ? "text-[#0b2748]"
-                    : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
-                }`}
+          {NAV.map((item, i) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.05 * i, ease: expo }}
               >
-                {item.label}
-                {item.dropdown && (
-                  <svg
-                    className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
+                <Link
+                  href={item.href}
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-all duration-300 rounded-sm relative group ${
+                    isActive
+                      ? "text-[#0b2748]"
+                      : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
+                  }`}
+                >
+                  {item.label}
+                  {item.dropdown && (
+                    <svg
+                      className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full"
                     />
-                  </svg>
-                )}
-                {item.active && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full"
-                  />
-                )}
-                <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-            </motion.div>
-          ))}
+                  )}
+                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </motion.div>
+            );
+          })}
         </nav>
 
-        <motion.button
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="shrink-0 w-9 h-9 flex items-center justify-center text-[#0b2748]/60 hover:text-[#0b2748] hover:bg-[#f0f3f7] rounded-sm transition-colors"
         >
-          <svg
-            className="w-4.5 h-4.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <circle cx={11} cy={11} r={8} />
-            <path strokeLinecap="round" d="M21 21l-4.35-4.35" />
-          </svg>
-        </motion.button>
+          <MagneticButton href="/contact" variant="primary">
+            Contact NDAS
+          </MagneticButton>
+        </motion.div>
       </div>
     </motion.header>
   );
 }
-
 /* ─────────────────────────── floating particles ────────────────── */
 
 function FloatingParticles({ count = 6 }: { count?: number }) {

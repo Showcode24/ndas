@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { DM_Sans } from "next/font/google";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -33,13 +34,8 @@ const NAV = [
   { label: "About NDAS", href: "/about", dropdown: true },
   { label: "Academics", href: "/academics", dropdown: true },
   { label: "Admissions", href: "/admissions", dropdown: false },
-  // { label: "Student Life", href: "/student-life", dropdown: true },
-  // { label: "Projects & Gallery", href: "/facilities", dropdown: false },
-  // { label: "News & Events", href: "/news", dropdown: false },
-  // { label: "Portal", href: "/portal", dropdown: false },
   { label: "Facilities", href: "/facilities", dropdown: false },
   { label: "Partnerships", href: "/partnerships", dropdown: false },
-  { label: "Contact", href: "/contact", dropdown: false },
 ];
 
 const FACILITIES = [
@@ -129,8 +125,13 @@ const FOOTER_COLS = [
   {
     heading: "Contact",
     links: [
-      { label: "Tiger Gate, Victoria Island", href: "#" },
-      { label: "Official contacts TBC", href: "#" },
+      {
+        label:
+          "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
+        href: "#",
+      },
+      { label: "Email: info@ndlapprenticeschool.com", href: "#" },
+      { label: "Phone: +234 904 799 8706", href: "/contact" },
       { label: "Send an enquiry", href: "/contact" },
     ],
   },
@@ -403,6 +404,7 @@ function Topbar() {
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -438,53 +440,60 @@ function Header() {
               Apprentice School
             </p>
             <p className="text-[#0b2748]/50 text-[10px] font-medium tracking-wide mt-0.5">
-              Practical skills · Technical discipline
+              Technology is Development
             </p>
           </div>
         </Link>
 
         <nav className="hidden xl:flex items-center gap-1 flex-1 justify-center">
-          {NAV.map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 * i, ease: expo }}
-            >
-              <Link
-                href={item.href}
-                className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-all duration-300 rounded-sm relative group ${
-                  item.active
-                    ? "text-[#0b2748]"
-                    : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
-                }`}
+          {NAV.map((item, i) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.05 * i, ease: expo }}
               >
-                {item.label}
-                {item.dropdown && (
-                  <svg
-                    className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
+                <Link
+                  href={item.href}
+                  className={`inline-flex items-center gap-1 px-3 py-2 text-[13px] font-semibold whitespace-nowrap transition-all duration-300 rounded-sm relative group ${
+                    isActive
+                      ? "text-[#0b2748]"
+                      : "text-[#0b2748]/65 hover:text-[#0b2748] hover:bg-[#f0f3f7]"
+                  }`}
+                >
+                  {item.label}
+                  {item.dropdown && (
+                    <svg
+                      className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full"
                     />
-                  </svg>
-                )}
-                {item.active && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full"
-                  />
-                )}
-                <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-            </motion.div>
-          ))}
+                  )}
+                  <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#af8f47] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </Link>
+              </motion.div>
+            );
+          })}
         </nav>
 
         <motion.div
@@ -1080,7 +1089,8 @@ function ExtendedContext() {
                   Map Integration
                 </p>
                 <p className="text-white/40 text-[12px] font-medium mt-1">
-                  Tiger Gate, Victoria Island, Lagos
+                  Naval Dockyard Apprentice School 28, Ahmadu Bello Way,
+                  Victoria Island, Lagos, Nigeria, Lagos
                 </p>
               </div>
             </div>
@@ -1111,15 +1121,6 @@ function Footer() {
           viewport={{ once: true }}
         >
           <div className="flex items-center gap-3 mb-4">
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-              style={{
-                background:
-                  "radial-gradient(circle at 38% 38%, #fff8dd 0%, #ecd18f 55%, #c8a03c 100%)",
-              }}
-            >
-              <span className="text-[#0b2748] font-black text-[11px]">ND</span>
-            </div>
             <p className="text-white font-black text-[13px] tracking-tight leading-snug">
               NAVAL DOCKYARD
               <br />

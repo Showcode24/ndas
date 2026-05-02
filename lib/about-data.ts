@@ -80,7 +80,7 @@ export const aboutPageData = {
 
   // Hero — corrected per client
   hero: {
-    badge: "History, Mandate and Leadership",
+    badge: "Heritage, Mandate and Leadership",
     heading: {
       main: "A Technical School Shaped by",
       highlight: "the Dockyard Environment.",
