@@ -148,8 +148,8 @@ const FOOTER_COLS = [
           "Naval Dockyard Apprentice School 28, Ahmadu Bello Way, Victoria Island, Lagos, Nigeria",
         href: "#",
       },
-      { label: "info@ndlapprenticeschool.com | +234 904 799 8706
-", href: "#" },
+      { label: "Email: info@ndlapprenticeschool.com", href: "#" },
+      { label: "Phone: +234 904 799 8706", href: "/contact" },
       { label: "Send an enquiry", href: "/contact" },
     ],
   },
