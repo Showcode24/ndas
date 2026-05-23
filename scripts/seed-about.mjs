@@ -3,7 +3,7 @@ import { config } from "dotenv";
 
 config();
 
-// ─── VALIDATE ENV VARS ─────────────────────────────
+// ─── VALIDATE ENVIRONMENT VARS ─────────────────────────────
 const PROJECT_ID = process.env.SANITY_PROJECT_ID;
 const DATASET = process.env.SANITY_DATASET || "production";
 const TOKEN = process.env.SANITY_API_WRITE_TOKEN;
