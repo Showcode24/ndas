@@ -16,7 +16,7 @@ import type { NewsPageData, NewsPostSummary } from "@/sanity/queries/news";
 /* ─────────────────────────── props ─────────────────────────────── */
 
 interface Props {
-  data:  NewsPageData;
+  data: NewsPageData;
   posts: NewsPostSummary[];
 }
 
@@ -26,7 +26,9 @@ const expo = [0.19, 1, 0.22, 1] as const;
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric", month: "long", year: "numeric",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
 }
 
@@ -34,7 +36,11 @@ function formatDate(iso: string) {
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-[2px] bg-[#af8f47] origin-left z-[60]"
@@ -45,7 +51,13 @@ function ScrollProgress() {
 
 /* ─────────────────────────── primitives ────────────────────────── */
 
-function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
+function Eyebrow({
+  children,
+  light,
+}: {
+  children: React.ReactNode;
+  light?: boolean;
+}) {
   return (
     <div className="flex items-center gap-3 mb-5">
       <motion.span
@@ -75,7 +87,9 @@ function Hero({ hero }: { hero: NewsPageData["hero"] }) {
           transition={{ duration: 1.2, ease: expo }}
           className="max-w-[640px]"
         >
-          <p className="text-white/40 text-[12px] font-medium mb-8">{hero.breadcrumbs}</p>
+          <p className="text-white/40 text-[12px] font-medium mb-8">
+            {hero.breadcrumbs}
+          </p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -166,7 +180,9 @@ function PostCard({ post }: { post: NewsPostSummary }) {
         <h3 className="text-base font-black text-[#0b2748] mb-2 leading-snug group-hover:text-[#af8f47] transition-colors duration-300">
           {post.title}
         </h3>
-        <p className="text-sm text-[#0b2748]/55 leading-relaxed line-clamp-3">{post.excerpt}</p>
+        <p className="text-sm text-[#0b2748]/55 leading-relaxed line-clamp-3">
+          {post.excerpt}
+        </p>
       </div>
     </motion.article>
   );
@@ -178,10 +194,10 @@ function ListingSection({
   posts,
   filters,
 }: {
-  posts:   NewsPostSummary[];
+  posts: NewsPostSummary[];
   filters: NewsPageData["filters"];
 }) {
-  const [activeTab, setActiveTab]     = useState<"all" | "news" | "event">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "news" | "event">("all");
   const [activeCategory, setCategory] = useState("All");
 
   const allCategories = ["All", ...filters.categories];
@@ -195,7 +211,6 @@ function ListingSection({
   return (
     <section className="py-20 bg-[#f8f9fb]">
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
-
         {/* Tab bar */}
         <div className="flex items-center gap-3 mb-8">
           {(["all", "news", "event"] as const).map((tab) => (
@@ -317,12 +332,26 @@ function CtaSection({ cta }: { cta: NewsPageData["cta"] }) {
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function NewsClient({ data, posts }: Props) {
+  if (!data) return null;
+
+  const safeFilters = {
+    categories: Array.isArray(data?.filters?.categories)
+      ? data.filters.categories
+      : [],
+  };
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <ListingSection posts={posts} filters={data.filters} />
-      <CtaSection cta={data.cta} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      <ListingSection
+        posts={Array.isArray(posts) ? posts : []}
+        filters={safeFilters}
+      />
+
+      {data.cta && <CtaSection cta={data.cta} />}
     </SiteLayout>
   );
 }

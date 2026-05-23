@@ -230,13 +230,23 @@ function CtaSection({ cta }: { cta: PartnershipsPageData["cta"] }) {
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function PartnershipsClient({ data }: Props) {
+  if (!data) return null;
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <ApproachSection partnershipApproach={data.partnershipApproach} />
-      <PartnersSection partners={data.partners} />
-      <CtaSection cta={data.cta} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      {data.partnershipApproach && (
+        <ApproachSection partnershipApproach={data.partnershipApproach} />
+      )}
+
+      <PartnersSection
+        partners={Array.isArray(data.partners) ? data.partners : []}
+      />
+
+      {data.cta && <CtaSection cta={data.cta} />}
     </SiteLayout>
   );
 }

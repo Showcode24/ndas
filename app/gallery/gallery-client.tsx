@@ -11,12 +11,15 @@ import Link from "next/link";
 import { X, ZoomIn, Calendar } from "lucide-react";
 
 import SiteLayout from "@/components/layouts/site-layout";
-import type { GalleryPageData, GalleryImageItem } from "@/sanity/queries/gallery";
+import type {
+  GalleryPageData,
+  GalleryImageItem,
+} from "@/sanity/queries/gallery";
 
 /* ─────────────────────────── props ─────────────────────────────── */
 
 interface Props {
-  data:   GalleryPageData;
+  data: GalleryPageData;
   images: GalleryImageItem[];
 }
 
@@ -26,7 +29,9 @@ const expo = [0.19, 1, 0.22, 1] as const;
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", {
-    day: "numeric", month: "short", year: "numeric",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 }
 
@@ -34,7 +39,11 @@ function formatDate(iso: string) {
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-[2px] bg-[#af8f47] origin-left z-[60]"
@@ -56,7 +65,9 @@ function Hero({ hero }: { hero: GalleryPageData["hero"] }) {
           transition={{ duration: 1.2, ease: expo }}
           className="max-w-[640px]"
         >
-          <p className="text-white/40 text-[12px] font-medium mb-8">{hero.breadcrumbs}</p>
+          <p className="text-white/40 text-[12px] font-medium mb-8">
+            {hero.breadcrumbs}
+          </p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -96,7 +107,7 @@ function Lightbox({
   image,
   onClose,
 }: {
-  image:   GalleryImageItem;
+  image: GalleryImageItem;
   onClose: () => void;
 }) {
   return (
@@ -167,22 +178,22 @@ function GalleryGrid({
   images,
   filters,
 }: {
-  images:  GalleryImageItem[];
+  images: GalleryImageItem[];
   filters: GalleryPageData["filters"];
 }) {
   const [activeCategory, setCategory] = useState("All");
-  const [lightbox, setLightbox]       = useState<GalleryImageItem | null>(null);
+  const [lightbox, setLightbox] = useState<GalleryImageItem | null>(null);
 
   const allCategories = ["All", ...filters.categories];
 
-  const filtered = activeCategory === "All"
-    ? images
-    : images.filter((img) => img.category === activeCategory);
+  const filtered =
+    activeCategory === "All"
+      ? images
+      : images.filter((img) => img.category === activeCategory);
 
   return (
     <section className="py-20 bg-[#f8f9fb]">
       <div className="max-w-screen-xl mx-auto px-6 sm:px-10">
-
         {/* Filter bar */}
         <div className="flex flex-wrap gap-2 mb-12">
           {allCategories.map((cat) => (
@@ -222,7 +233,15 @@ function GalleryGrid({
                   onClick={() => setLightbox(img)}
                 >
                   {img.image ? (
-                    <div className="relative w-full" style={{ aspectRatio: img.imageWidth && img.imageHeight ? `${img.imageWidth}/${img.imageHeight}` : "4/3" }}>
+                    <div
+                      className="relative w-full"
+                      style={{
+                        aspectRatio:
+                          img.imageWidth && img.imageHeight
+                            ? `${img.imageWidth}/${img.imageHeight}`
+                            : "4/3",
+                      }}
+                    >
                       <Image
                         src={img.image}
                         alt={img.alt ?? img.title}
@@ -339,12 +358,24 @@ function CtaSection({ cta }: { cta: GalleryPageData["cta"] }) {
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function GalleryClient({ data, images }: Props) {
+  if (!data) return null;
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <GalleryGrid images={images} filters={data.filters} />
-      <CtaSection cta={data.cta} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      <GalleryGrid
+        images={Array.isArray(images) ? images : []}
+        filters={{
+          categories: Array.isArray(data?.filters?.categories)
+            ? data.filters.categories
+            : [],
+        }}
+      />
+
+      {data.cta && <CtaSection cta={data.cta} />}
     </SiteLayout>
   );
 }

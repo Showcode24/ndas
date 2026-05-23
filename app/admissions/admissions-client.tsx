@@ -373,14 +373,27 @@ function CtaSection({ cta }: { cta: AdmissionsPageData["cta"] }) {
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function AdmissionsClient({ data }: Props) {
+  if (!data) return null;
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <SelectionSection selection={data.selection} />
-      <EligibilitySection eligibility={data.eligibility} />
-      <FaqSection faq={data.faq} />
-      <CtaSection cta={data.cta} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      {data.selection && (
+        <SelectionSection selection={data.selection} />
+      )}
+
+      {data.eligibility && (
+        <EligibilitySection eligibility={data.eligibility} />
+      )}
+
+      {Array.isArray(data.faq) && data.faq.length > 0 && (
+        <FaqSection faq={data.faq} />
+      )}
+
+      {data.cta && <CtaSection cta={data.cta} />}
     </SiteLayout>
   );
 }

@@ -364,14 +364,27 @@ function CtaSection({ cta }: { cta: AcademicsPageData["cta"] }) {
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function AcademicsClient({ data, courses }: Props) {
+  if (!data) return null;
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <TrainingStructure trainingStructure={data.trainingStructure} />
-      <CoursesSection trades={data.trades} courses={courses} />
-      <FeaturesSection features={data.features} />
-      <CtaSection cta={data.cta} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      {data.trainingStructure && (
+        <TrainingStructure trainingStructure={data.trainingStructure} />
+      )}
+
+      {data.trades?.length > 0 && (
+        <CoursesSection trades={data.trades} courses={courses ?? []} />
+      )}
+
+      {data.features && (
+        <FeaturesSection features={data.features} />
+      )}
+
+      {data.cta && <CtaSection cta={data.cta} />}
     </SiteLayout>
   );
 }

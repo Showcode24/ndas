@@ -232,14 +232,29 @@ function ExtendedContext({ extendedContext }: { extendedContext: FacilitiesPageD
 /* ─────────────────────────── root ──────────────────────────────── */
 
 export default function FacilitiesClient({ data }: Props) {
+  if (!data) return null;
+
   return (
     <SiteLayout>
       <ScrollProgress />
-      <Hero hero={data.hero} />
-      <TrainingEnvironment trainingEnvironment={data.trainingEnvironment} />
-      <FacilityCards facilities={data.facilities} />
-      <Highlights highlights={data.highlights} />
-      <ExtendedContext extendedContext={data.extendedContext} />
+
+      {data.hero && <Hero hero={data.hero} />}
+
+      {data.trainingEnvironment && (
+        <TrainingEnvironment trainingEnvironment={data.trainingEnvironment} />
+      )}
+
+      {Array.isArray(data.facilities) && data.facilities.length > 0 && (
+        <FacilityCards facilities={data.facilities} />
+      )}
+
+      {Array.isArray(data.highlights) && data.highlights.length > 0 && (
+        <Highlights highlights={data.highlights} />
+      )}
+
+      {data.extendedContext && (
+        <ExtendedContext extendedContext={data.extendedContext} />
+      )}
     </SiteLayout>
   );
 }
